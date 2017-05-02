@@ -1,17 +1,21 @@
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
 
-const controller = {};
-
 const User = require('../../models/User');
+
+const controller = {};
 
 controller.index = (req, res) => {
   User
     .findAll()
-    .then((data) => {
-      res.json({ user: data })
+    .then((users) => {
+      res.json(users)
     })
-    .catch((err) => console.log('ERROR', err));
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    });
 }
 
 controller.authorizeToken = (req, res) => {
@@ -68,6 +72,17 @@ controller.create = (req, res) => {
     .catch((err) => console.log('ERROR', err));
 };
 
-controller.delete 
+controller.delete = (req, res) => {
+  User
+    .destroy(req.params.id)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    });
+};
 
 module.exports = controller;

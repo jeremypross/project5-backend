@@ -4,9 +4,8 @@ const db     = require('../config/db');
 const User = {};
 
 User.findAll = () => {
-  return db.query(`
-    SELECT * FROM users`);
-};
+  return db.query(`SELECT * FROM users`);
+}
 
 User.create = (user) => {
   console.log('User.create in model', user);

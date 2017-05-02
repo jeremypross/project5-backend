@@ -3,7 +3,29 @@ const expect  = require('chai').expect;
 
 const app = require('../index');
 
+const User = require('../models/User');
+
 describe('Users', () => {
+
+  let user;
+
+  before((done) => {
+    User
+      .create({
+        first_name: "Tom",
+        last_name: "Jones",
+        email: "tom@jones.com",
+        password_digest: "password"
+      })
+      .then((data) => {
+        book = data;
+        done()
+      });
+  })
+
+  after((done) => {
+    done();
+  })
 
   it('GET /users should return a 200 status code and be an array', (done) => {
     request(app)
@@ -17,7 +39,7 @@ describe('Users', () => {
 
   it('GET /users should return a 200 status code and be an Object', (done) => {
     request(app)
-    .get('/users/1')
+    .get(`/users/${user.id}`)
     .end((err, results) => {
       expect(results.statusCode).to.equal(200);
       expect(results.body).to.be.an.instanceOf(Object);
@@ -51,7 +73,7 @@ describe('Users', () => {
       user: {
         first_name: "Jeremy",
         last_name: "Ross",
-        email: "jeremypross@gmail.com",
+        email: "jeremy@ross.com",
         password: "password"
       }
     })
