@@ -38,3 +38,6 @@ app.use('/', require('./resources'));
 app.listen(PORT, () => {
   console.log('Server is listening on', PORT);
 });
+
+// export app for test suite 
+module.exports = app;

@@ -21,7 +21,9 @@ controller.authorizeToken = (req, res) => {
         .status(401)
         .json({ error: err.message });
     } else {
-      // FIND SAVED ITEMS BY USER EMAIL HERE
+      res.status(200)
+      console.log('*** Token Successfully Authorized! ***');
+      // FIND SAVED ITEMS BY USER EMAIL TO DASHBOARD HERE
     }
   })
 }
@@ -65,5 +67,7 @@ controller.create = (req, res) => {
     })
     .catch((err) => console.log('ERROR', err));
 };
+
+controller.delete 
 
 module.exports = controller;
