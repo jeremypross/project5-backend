@@ -8,6 +8,7 @@ describe('Users', () => {
   let user;
 
   before((done) => {
+
     User
       .create({
         first_name: "Jeremy",

@@ -7,10 +7,12 @@ router.get('/dashboard', controller.authorizeToken);
 
 router.post('/login', controller.login);
 
+router.get('/:id', controller.show);
+
 router.post('/', controller.create);
 
 router.put('/:id', controller.update);
 
-router.get('/:id', controller.show);
+router.delete('/:id', controller.destroy);
 
 module.exports = router;

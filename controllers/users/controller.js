@@ -62,6 +62,19 @@ controller.login = (req, res) => {
     });
 }
 
+controller.show = (req, res) => {
+  User
+    .findById(req.params.id)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    })
+}
+
 controller.create = (req, res) => {
   User
     .create(req.body.user)
@@ -82,7 +95,7 @@ controller.update = (req, res) => {
     .update(req.body.user, req.params.id)
     .then((user) => {
       res
-      .status(200);
+      .sendStatus(200);
     })
     .catch((err) => {
       res
@@ -91,30 +104,18 @@ controller.update = (req, res) => {
     });
 };
 
-controller.delete = (req, res) => {
+controller.destroy = (req, res) => {
   User
-    .destroy(req.params.id)
-    .then(() => {
-      res.redirect('/');
-    })
-    .catch((err) => {
-      res
-      .status(400)
-      .json(err);
-    });
+  .destroy(req.params.id)
+  .then(() => {
+    res
+    .sendStatus(200)
+  })
+  .catch((err) => {
+    res
+    .status(400)
+    .json(err);
+  });
 };
-
-controller.show = (req, res) => {
-  User
-    .findById(req.params.id)
-    .then((data) => {
-      res.json(data)
-    })
-    .catch((err) => {
-      res
-      .status(400)
-      .json(err);
-    })
-}
 
 module.exports = controller;

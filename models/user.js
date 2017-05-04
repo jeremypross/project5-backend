@@ -33,7 +33,7 @@ User.findById = (id) => {
 };
 
 User.update = (user, id) => {
-  // const passwordUpdated = bcrypt.hashSync(user.password_digest, 10);
+  // const updatedPassword = bcrypt.hashSync(user.password_digest, 10);
   return db.none(`
     UPDATE users
     SET
@@ -52,7 +52,7 @@ User.update = (user, id) => {
   );
 }
 
-User.destroy = (user) => {
+User.destroy = (id) => {
   return db.none(`
     DELETE FROM users
     WHERE id = $1`,
