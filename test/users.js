@@ -1,9 +1,7 @@
 const request = require('supertest');
 const expect  = require('chai').expect;
-
-const app = require('../index');
-
-const User = require('../models/User');
+const app     = require('../index');
+const User    = require('../models/User');
 
 describe('Users', () => {
 
@@ -12,14 +10,14 @@ describe('Users', () => {
   before((done) => {
     User
       .create({
-        first_name: "Tom",
-        last_name: "Jones",
-        email: "tom@jones.com",
+        first_name: "Jeremy",
+        last_name: "Ross",
+        email: "jeremy@ross.com",
         password_digest: "password"
       })
       .then((data) => {
-        book = data;
-        done()
+        user = data;
+        done();
       });
   })
 
@@ -37,7 +35,7 @@ describe('Users', () => {
     })
   })
 
-  it('GET /users should return a 200 status code and be an Object', (done) => {
+  it('GET /users/:id should return a 200 status code and be an Object', (done) => {
     request(app)
     .get(`/users/${user.id}`)
     .end((err, results) => {
@@ -49,7 +47,7 @@ describe('Users', () => {
 
   it('POST /users should return a 201 status code and be an object', (done) => {
     request(app)
-    .post('/users')
+    .post(`/users`)
     .send({
       user: {
         first_name: "John",
@@ -68,13 +66,13 @@ describe('Users', () => {
 
   it('PUT /users/:id should return a 200 status code', (done) => {
     request(app)
-    .put('/users/1')
+    .put(`/users/${user.id}`)
     .send({
       user: {
-        first_name: "Jeremy",
-        last_name: "Ross",
-        email: "jeremy@ross.com",
-        password: "password"
+        first_name: "Paul",
+        last_name: "Jones",
+        email: "paul@jones.com",
+        password_digest: "password"
       }
     })
     .end((err, results) => {
@@ -85,7 +83,7 @@ describe('Users', () => {
 
   it('DELETE /users/:id should return a 200 status code', (done) => {
     request(app)
-    .delete('/users/2')
+    .delete(`/users/${user.id}`)
     .end((err, results) => {
       expect(results.statusCode).to.equal(200);
       done();

@@ -66,10 +66,29 @@ controller.create = (req, res) => {
   User
     .create(req.body.user)
     .then((data) => {
-      res.status(201)
-      res.json({ user: data })
+      res
+      .status(201)
+      .json({ user: data })
     })
-    .catch((err) => console.log('ERROR', err));
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    });
+};
+
+controller.update = (req, res) => {
+  User
+    .update(req.body.user, req.params.id)
+    .then((user) => {
+      res
+      .status(200);
+    })
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    });
 };
 
 controller.delete = (req, res) => {
@@ -84,5 +103,18 @@ controller.delete = (req, res) => {
       .json(err);
     });
 };
+
+controller.show = (req, res) => {
+  User
+    .findById(req.params.id)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    })
+}
 
 module.exports = controller;

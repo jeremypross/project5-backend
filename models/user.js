@@ -32,6 +32,26 @@ User.findById = (id) => {
   );
 };
 
+User.update = (user, id) => {
+  // const passwordUpdated = bcrypt.hashSync(user.password_digest, 10);
+  return db.none(`
+    UPDATE users
+    SET
+      first_name = $1,
+      last_name = $2,
+      email = $3,
+      password_digest = $4
+    WHERE id = $5`,
+    [
+      user.first_name,
+      user.last_name,
+      user.email,
+      user.password_digest,
+      id
+    ]
+  );
+}
+
 User.destroy = (user) => {
   return db.none(`
     DELETE FROM users
