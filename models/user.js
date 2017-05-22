@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const db     = require('../config/db');
 
-const User = {};
+const User   = {};
 
 User.findAll = () => {
   return db.query(`SELECT * FROM users`);
@@ -33,7 +33,7 @@ User.findById = (id) => {
 };
 
 User.update = (user, id) => {
-  // const updatedPassword = bcrypt.hashSync(user.password_digest, 10);
+  const updatedPassword = bcrypt.hashSync(user.password_digest, 10);
   return db.none(`
     UPDATE users
     SET
@@ -46,7 +46,7 @@ User.update = (user, id) => {
       user.first_name,
       user.last_name,
       user.email,
-      user.password_digest,
+      updatedPassword,
       id
     ]
   );

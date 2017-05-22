@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
-
-const User = require('../../models/User');
+const User   = require('../../models/User');
 
 const controller = {};
 
@@ -32,6 +31,19 @@ controller.authorizeToken = (req, res) => {
   })
 }
 
+controller.show = (req, res) => {
+  User
+    .findById(req.params.id)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res
+      .status(400)
+      .json(err);
+    })
+}
+
 controller.login = (req, res) => {
   User
     .findByEmail(req.body.user.email)
@@ -60,19 +72,6 @@ controller.login = (req, res) => {
         .json({ error: 'No user found' });
       }
     });
-}
-
-controller.show = (req, res) => {
-  User
-    .findById(req.params.id)
-    .then((data) => {
-      res.json(data)
-    })
-    .catch((err) => {
-      res
-      .status(400)
-      .json(err);
-    })
 }
 
 controller.create = (req, res) => {
