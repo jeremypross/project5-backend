@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS posts;
+-- DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS articles;
 
 CREATE TABLE users (
@@ -12,12 +12,12 @@ CREATE TABLE users (
   password_digest VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE posts (
-  id BIGSERIAL PRIMARY KEY,
-  title TEXT NOT NULL,
-  content TEXT NOT NULL,
-  user_id INTEGER NOT NULL
-);
+-- CREATE TABLE posts (
+--   id BIGSERIAL PRIMARY KEY,
+--   title TEXT NOT NULL,
+--   content TEXT NOT NULL,
+--   user_id INTEGER NOT NULL
+-- );
 
 CREATE TABLE articles (
   id BIGSERIAL PRIMARY KEY,

@@ -12,4 +12,15 @@ controller.index = (req, res) => {
     })
 }
 
+controller.create = (req, res) => {
+  Article
+    .create()
+    .then((data) => {
+      res.json(200)
+    })
+    .catch((err) => {
+      console.log('ERROR', err);
+    })
+}
+
 module.exports = controller;
