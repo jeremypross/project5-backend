@@ -18,4 +18,15 @@ CREATE TABLE posts (
   user_id INTEGER NOT NULL
 );
 
+CREATE TABLE articles (
+  id BIGSERIAL PRIMARY KEY,
+  author TEXT,
+  title TEXT,
+  description TEXT,
+  url TEXT,
+  urlToImage TEXT,
+  published TEXT,
+  user_id INTEGER REFERENCES users(id)
+);
+
 COMMIT;

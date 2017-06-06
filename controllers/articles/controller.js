@@ -1,8 +1,8 @@
-const Post = require('../../models/Post');
+const Article = require('../../models/Article');
 const controller = {};
 
 controller.index = (req, res) => {
-  Post
+  Article
     .findAll()
     .then((data) => {
       res.json(200)
