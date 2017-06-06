@@ -24,6 +24,7 @@
     "node-fetch": "^1.6.3",
     "path": "^0.12.7",
     "pg-promise": "^5.6.7",
+    "react-addons-update": "^15.5.2",
     "supertest": "^3.0.0"
   }
 }
