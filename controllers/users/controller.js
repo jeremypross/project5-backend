@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
-const User   = require('../../models/User');
 
 const controller = {};
+
+const User   = require('../../models/User');
 
 controller.index = (req, res) => {
   User
@@ -76,16 +77,14 @@ controller.login = (req, res) => {
 
 controller.create = (req, res) => {
   User
-    .create(req.body.user)
+    .create(req.body)
     .then((data) => {
-      res
-      .status(201)
-      .json({ user: data })
+      res.status(201)
+      res.json({ user: data })
     })
     .catch((err) => {
-      res
-      .status(400)
-      .json(err);
+      res.status(400)
+      res.json(err);
     });
 };
 

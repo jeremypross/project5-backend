@@ -32,6 +32,14 @@ User.findById = (id) => {
   );
 };
 
+User.findByEmail = (email) => {
+  return db.oneOrNone(`
+    SELECT * FROM users
+    WHERE email = $1;`,
+    [email]
+  );
+};
+
 User.update = (user, id) => {
   const updatedPassword = bcrypt.hashSync(user.password_digest, 10);
   return db.none(`
