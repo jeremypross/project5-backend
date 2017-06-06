@@ -14,9 +14,9 @@ controller.index = (req, res) => {
 
 controller.create = (req, res) => {
   Article
-    .create()
+    .create(req.body.article)
     .then((data) => {
-      res.json(200)
+      res.sendStatus(201)
     })
     .catch((err) => {
       console.log('ERROR', err);
